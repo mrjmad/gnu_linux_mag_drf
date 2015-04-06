@@ -1,0 +1,74 @@
+En python 2.X
+==============
+
+Virtualenv et VirtualenWrapper
+******************************
+
+Virtualenv vous permet de créer de multiples environnements virtuels python. Le but est d'avoir un environnement
+python par projet. Vous pouvez ainsi gérer finement les versions des librairies que vous voulez utiliser pour
+chacun de vos projets. Vous pourrez même aller plus loin et avoir plusieurs virtualenv pour vos projets, afin par
+exemple de pouvoir tester vos projets avec plusieurs versions de django.  L'utilisation de virtualenv offre un
+deuxième avantage important, dans un environnement de production, vous n'êtes pas tributaire de l'administrateur de
+votre serveur, vous pouvez vous même installer les packages dont vous avez besoin dans la version que vous voulez.
+Mais attention, pouvoir installer des librairies en temps que simple utilisateur vous rends responsable des paquets en
+question. Il vous faudra donc gérer tout ce qui est mise à jour en cas de problème de sécurité ou autre.
+Virtualenwrapper fournit des outils simplifiant l'utilisation de virtualenv et offrant de nouvelles fonctionnalités.
+
+Il existe plusieurs manière d'installer ces deux outils. La plus facile est de passer par votre gestionnaire de paquet:
+
+root@debian:/home/jmad# apt-get install python-virtualenv virtualenvwrapper
+
+Vous devez ensuite créer dans votre répertoire $HOME, le répertoire qui contiendra tout les virtualenvs (par convention
+on le nomme .virtualenvs) et ajouter la ligne suivant dans votre .bashrc :
+export WORKON_HOME=~/.virtualenvs
+
+Vous pouvez aussi utiliser pip, en root pour installer les choses.
+
+Dans le cas où vous utiliser pip pour installer le tout , il vous faudra modifier un peu plus votre bashrc en y
+ajoutant la ligne suivante :
+source /usr/local/bin/virtualenvwrapper.sh
+
+
+Pour créer un virtualenv il vous suffit ensuite de lancer la commande :
+
+mkvirtualenv NomVirtualEnv
+
+Pour quitter un virtualenv activé, il faut utiliser la commande :
+deactivate
+
+Pour activer un virtualenv ou passer d'un virtualenv à un autre, il vous faudra utiliser la commande :
+
+workon NomVirtualEnv
+
+Enfin, voici d'autres commandes utiles :
+    - lsvirtualenv qui liste tout vos virtualenv
+    - rmvirtualenv et cpvirtualenv qui supprime ou copie des virtualenv
+    - cdvirtualenv et cdsitepackages qui vous déplace respectivement dans le répertoire du virtualenv actif ou
+    dans son répertoire site-packages
+    - add2virtualenv qui ajoutera les répertoires donnés en argument dans le python path de votre virtualenv.
+    - mkproject qui, si vous avez renseigné la variable PROJECT_HOME, vous permettra de créer à la fois un virtualenv
+    et un projet en utilisant des templates de projet (exemple : mkproject -t bitbucket -t django my_site )
+
+
+En python 3
+===========
+
+Environnement virtuel en python 3
+*********************************
+
+Une commande de création d'environnement virtuel est intégré directement dans Python 3 :
+   - pyvenv-3.X (le X correspondant à la version de votre python 3 )
+
+Pour créer un environnement virtuel en python 3.4 il faut alors taper la commande :
+    pyvenv-3.4 PATH_VERS_REPERTOIRE_STOCKAGE/NOM_VENV
+
+Soit par exemple :
+    pyvenv-3.4 ~/.virtualenvs/py34irc
+
+Pour activer un environnement virtuel python en python 3, il faut utiliser la commande suivante :
+    source PATH_VERS_REPERTOIRE_STOCKAGE/NOM_VENV/bin/activate
+
+Soit par exemple :
+    source ~/.virtualenvs/py34irc/bin/activate
+
+
